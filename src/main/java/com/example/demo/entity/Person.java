@@ -13,6 +13,7 @@ public class Person {
     private String phoneNumber;
     private String address;
     private int age;
+    @Enumerated(EnumType.STRING)
     private Gender gender;
     private LocalDateTime timestamp;
 

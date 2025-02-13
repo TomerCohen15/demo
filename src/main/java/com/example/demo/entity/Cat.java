@@ -4,50 +4,28 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class Cat extends Animal {
+    private int clawSharpness;
 
-
-
-    public Cat(String name, String breed, int age, Gender gender) {
-
+    public Cat(String name, String breed, int age, Gender gender, int clawSharpness) {
+        super(name, breed, age, gender);
+        this.clawSharpness = clawSharpness;
     }
 
     public Cat() {
+        super();
 
     }
 
-    public String getName() {
-        return name;
+    public int getClawSharpness() {
+        return clawSharpness;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getBreed() {
-        return breed;
-    }
-
-    public void setBreed(String breed) {
-        this.breed = breed;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
+    public void setClawSharpness(int clawSharpness) {
+        this.clawSharpness = clawSharpness;
     }
 
     @Override
     public String toString() {
-        return "Cat{" +
-                "id=" + getId() +
-//                ", type='" + getType() + '\'' +
-                ", timestamp=" + getTimestamp() +
-                ", name='" + name + '\'' +
-                ", breed='" + breed + '\'' +
-                ", age=" + age +
-                '}';
+        return super.toString() + "clawSharpness=" + clawSharpness;
     }
 }

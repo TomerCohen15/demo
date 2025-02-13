@@ -12,6 +12,7 @@ public abstract class Animal {
     private String name;
     private String breed;
     private int age;
+    @Enumerated(EnumType.STRING)
     private Gender gender;
     @ManyToOne
     private Person adoptedBy = null;
@@ -20,13 +21,7 @@ public abstract class Animal {
 //    private String type;
     private LocalDateTime timestamp;
 
-    public Person getAdoptedBy() {
-        return adoptedBy;
-    }
-
-    public void setAdoptedBy(Person adoptedBy) {
-        this.adoptedBy = adoptedBy;
-    }
+    public Animal() {}
 
     public Animal(String name, String breed, int age, Gender gender){
         this.name = name;
@@ -56,6 +51,13 @@ public abstract class Animal {
     public Long getId() {
         return id;
     }
+    public Person getAdoptedBy() {
+        return adoptedBy;
+    }
+
+    public void setAdoptedBy(Person adoptedBy) {
+        this.adoptedBy = adoptedBy;
+    }
 
 //    public String getType() {
 //        return type;
@@ -80,5 +82,41 @@ public abstract class Animal {
 
     public void setAdoptedDate(LocalDateTime adoptedDate) {
         this.adoptedDate = adoptedDate;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBreed() {
+        return breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }
