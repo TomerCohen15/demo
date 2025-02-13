@@ -3,15 +3,21 @@ package com.example.demo.entity;
 import jakarta.persistence.Entity;
 
 @Entity
-public class Cat extends Animal {
+public class Dog extends Animal {
 
+    private String name;
+    private String breed;
+    private int age;
+    private Gender gender;
 
-
-    public Cat(String name, String breed, int age, Gender gender) {
-
+    public Dog(String name, String breed, int age, Gender gender) {
+        this.name = name;
+        this.breed = breed;
+        this.age = age;
+        this.gender = gender;
     }
 
-    public Cat() {
+    public Dog() {
 
     }
 
@@ -41,7 +47,7 @@ public class Cat extends Animal {
 
     @Override
     public String toString() {
-        return "Cat{" +
+        return "Dog{" +
                 "id=" + getId() +
 //                ", type='" + getType() + '\'' +
                 ", timestamp=" + getTimestamp() +

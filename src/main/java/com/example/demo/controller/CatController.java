@@ -21,8 +21,9 @@ public class CatController {
 
     @PostMapping
     public Cat addCat(@RequestBody Cat cat) {
-        logger.info("add Cat: {}", cat);
-        return catService.saveCat(cat);
+        Cat newCat = catService.saveCat(cat);
+        logger.info("added Cat: {}", newCat);
+        return newCat;
     }
 
     @GetMapping
@@ -32,7 +33,9 @@ public class CatController {
 
     @DeleteMapping
     public void deleteCat(@RequestParam("id") Long id) {
-        logger.info("delete Cat: {}", id);
+        Cat cat = catService.getCatById(id);
+        logger.info("deleting Cat: {}, with name {}", id, cat.getName());
         catService.deleteCat(id);
+        logger.info("deleted Cat: {}, with name {}", id, cat.getName());
     }
 }
