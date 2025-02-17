@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CatService {
@@ -25,10 +26,10 @@ public class CatService {
         return catRepository.findAll();
     }
 
-    public void deleteCat(Long id) {
+    public void deleteCat(UUID id) {
         catRepository.deleteById(id);
     }
 
-    public Cat getCatById(Long id) { return catRepository.getCatById(id).get(); }
+    public Cat getCatById(UUID id) { return catRepository.getCatById(id).get(); }
 
 }

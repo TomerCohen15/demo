@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/cats")
@@ -32,7 +33,7 @@ public class CatController {
     }
 
     @DeleteMapping
-    public void deleteCat(@RequestParam("id") Long id) {
+    public void deleteCat(@RequestParam("id") UUID id) {
         Cat cat = catService.getCatById(id);
         logger.info("deleting Cat: {}, with name {}", id, cat.getName());
         catService.deleteCat(id);

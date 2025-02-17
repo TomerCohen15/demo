@@ -5,14 +5,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface DogRepository extends JpaRepository<Dog, Long> {
+public interface DogRepository extends JpaRepository<Dog, UUID> {
     Optional<Dog> findByNameAndAge(String name, int age);
 
     Optional<Dog> findDogByAgeBetween(int ageAfter, int ageBefore);
 
-    Optional<Dog> findDogById(long id);
+    Optional<Dog> findDogById(UUID id);
 
-    Optional<Dog> getDogById(Long id);
+    Optional<Dog> getDogById(UUID id);
+
 }

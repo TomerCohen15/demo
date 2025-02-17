@@ -2,14 +2,15 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Animal {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     private String name;
     private String breed;
     private int age;
@@ -31,25 +32,12 @@ public abstract class Animal {
         this.gender = gender;
     }
 
-    public Animal(String name, String breed, int age, Gender gender, Person adoptedBy, LocalDateTime adoptedDate) {
-        this.name = name;
-        this.breed = breed;
-        this.age = age;
-        this.gender = gender;
-        this.adoptedBy = adoptedBy;
-        this.adoptedDate = adoptedDate;
-    }
-
-//    public Animal(String type) {
-//        this.type = type;
-//    }
-
     @PrePersist
     protected void onCreate() {
         timestamp = LocalDateTime.now();
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
     public Person getAdoptedBy() {
@@ -60,10 +48,6 @@ public abstract class Animal {
         this.adoptedBy = adoptedBy;
     }
 
-//    public String getType() {
-//        return type;
-//    }
-
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
@@ -72,7 +56,6 @@ public abstract class Animal {
     public String toString() {
         return "Animal{" +
                 "id=" + id +
-//                ", type='" + type + '\'' +
                 ", timestamp=" + timestamp +
                 '}';
     }
@@ -85,7 +68,7 @@ public abstract class Animal {
         this.adoptedDate = adoptedDate;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

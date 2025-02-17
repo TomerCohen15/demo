@@ -1,8 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Animal;
-import com.example.demo.entity.Cat;
-import com.example.demo.entity.Dog;
 import com.example.demo.entity.Person;
 import com.example.demo.repository.AnimalRepository;
 import com.example.demo.repository.CatRepository;
@@ -12,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class AdoptService {
@@ -30,7 +30,7 @@ public class AdoptService {
         return personRepository.save(person);
     }
 
-    public Animal updateAnimalAdoptedBy(Long animalId, Person adopter) {
+    public Animal updateAnimalAdoptedBy(UUID animalId, Person adopter) {
         Optional<Animal> animalOptional = animalRepository.findById(animalId);
         if (animalOptional.isPresent()) {
             Animal animal = animalOptional.get();
@@ -41,4 +41,6 @@ public class AdoptService {
         }
         throw new RuntimeException("Animal with ID " + animalId + " not found");
     }
+
+    public List<Animal> getAllAdoptedAnimals() { return animalRepository.findAllByAdoptedByIsNotNull(); }
 }

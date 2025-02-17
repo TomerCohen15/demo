@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/persons")
@@ -32,7 +33,7 @@ public class PersonController {
     }
 
     @DeleteMapping
-    public void deletePerson(@RequestParam("id") Long id) {
+    public void deletePerson(@RequestParam("id") UUID id) {
         Person person = personService.getPersonById(id);
         logger.info("deleting Person: {}, with name {}", id, person.getName());
         personService.deletePerson(id);

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/dogs")
@@ -32,7 +33,7 @@ public class DogController {
     }
 
     @DeleteMapping
-    public void deleteDog(@RequestParam("id") Long id) {
+    public void deleteDog(@RequestParam("id") UUID id) {
         Dog dog = dogService.getDogById(id);
         logger.info("Deleting Dog: {}, with name {}", id, dog.getName());
         dogService.deleteDog(id);
