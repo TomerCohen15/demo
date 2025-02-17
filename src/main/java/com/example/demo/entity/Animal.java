@@ -3,7 +3,8 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Animal {
 
     @Id

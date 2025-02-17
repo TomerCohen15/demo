@@ -7,9 +7,9 @@ public class Dog extends Animal {
 
     private int barkLoudness;
 
-    public Dog(String name, String breed, int age, Gender gender, int clawSharpness) {
+    public Dog(String name, String breed, int age, Gender gender, int barkLoudness) {
         super(name, breed, age, gender);
-        this.barkLoudness = clawSharpness;
+        this.barkLoudness = barkLoudness;
     }
 
     public Dog() {
