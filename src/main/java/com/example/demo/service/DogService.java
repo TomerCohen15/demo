@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.AnimalNotFoundException;
+import com.example.demo.exceptions.AnimalNotFoundException;
 import com.example.demo.entity.Dog;
 import com.example.demo.repository.DogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
