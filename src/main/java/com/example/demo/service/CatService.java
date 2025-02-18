@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.AnimalNotFoundException;
 import com.example.demo.entity.Cat;
 import com.example.demo.repository.CatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,6 @@ public class CatService {
         catRepository.deleteById(id);
     }
 
-    public Cat getCatById(UUID id) { return catRepository.getCatById(id).get(); }
+    public Cat getCatById(UUID id) { return catRepository.getCatById(id).orElseThrow(() -> new AnimalNotFoundException("Cat with ID " + id + " not found")); }
 
 }
