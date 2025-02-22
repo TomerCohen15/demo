@@ -15,6 +15,8 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import static com.example.demo.entity.Gender.MALE;
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,8 +36,10 @@ class PersonServiceUnitTest {
     }
 
     @Test
-    void testGetAllCats() {
+    void testUpdatePerson() {
+        UUID personId = UUID.fromString("11111111-1111-1111-1111-111111111111");
         Person expectedPerson = new Person();
+        expectedPerson.setId(personId);
         expectedPerson.setName("John");
         expectedPerson.setAddress("Main street 321");
         expectedPerson.setAge(32);
@@ -43,6 +47,7 @@ class PersonServiceUnitTest {
         expectedPerson.setPhoneNumber("1234567890");
         // Given
         Person currentPerson = new Person();
+        currentPerson.setId(personId);
         currentPerson.setName("John");
         currentPerson.setAddress("Main street 123");
         currentPerson.setAge(32);
@@ -50,10 +55,12 @@ class PersonServiceUnitTest {
         currentPerson.setPhoneNumber("1234567890");
 
         Person personUpdate = new Person();
+        personUpdate.setId(personId);
         personUpdate.setAddress("Main street 321");
         personUpdate.setName("");
 
-        when(personRepository.save(currentPerson)); // Mock repository behavior
+        when(personRepository.getPersonById(personId)).thenReturn(Optional.of(currentPerson)); // Mock repository behavior
+        when(personRepository.save(expectedPerson)).thenReturn(expectedPerson); // Mock repository behavior
 
         // When
         Person updatedPerson = personService.updatePerson(personUpdate);

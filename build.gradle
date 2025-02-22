@@ -61,3 +61,8 @@ tasks.named('test') {
     }
     useJUnitPlatform()
 }
+// Ensure the built JAR file has the correct name
+bootJar {
+    archiveFileName = 'animal-shelter-docker.jar'
+}
+
