@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Cat;
 import com.example.demo.service.CatService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
@@ -21,13 +22,14 @@ public class CatController {
     }
 
     @PostMapping
-    public Cat addCat(@RequestBody Cat cat) {
+    public Cat addCat(@Valid @RequestBody Cat cat) {
         Cat newCat = catService.saveCat(cat);
         logger.info("added Cat: {}", newCat);
         return newCat;
     }
 
-    @GetMapping
+
+    @GetMapping("getAllCats")
     public List<Cat> getAllCats() {
         return catService.getAllCats();
     }

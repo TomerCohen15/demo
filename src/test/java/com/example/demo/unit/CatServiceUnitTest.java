@@ -55,7 +55,7 @@ class CatServiceUnitTest {
         assertEquals("Whiskers", retrievedCats.get(0).getName());
         assertEquals("Garfield", retrievedCats.get(1).getName());
 
-        verify(catRepository, times(1)).findAll(); // Verify that findAll() was called
+        verify(catRepository, times(1)).findAll();
     }
 
 }

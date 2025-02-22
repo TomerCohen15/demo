@@ -1,7 +1,11 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.AnimalWithoutAdoptedByDTO;
+import com.example.demo.dto.PersonWithAdoptedAnimalsDTO;
 import com.example.demo.entity.Animal;
 import com.example.demo.entity.Person;
+import com.example.demo.exceptions.AnimalNotFoundException;
+import com.example.demo.exceptions.PersonNotFoundException;
 import com.example.demo.repository.AnimalRepository;
 import com.example.demo.repository.CatRepository;
 import com.example.demo.repository.DogRepository;
@@ -32,15 +36,24 @@ public class AdoptService {
 
     public Animal updateAnimalAdoptedBy(UUID animalId, Person adopter) {
         Optional<Animal> animalOptional = animalRepository.findById(animalId);
-        if (animalOptional.isPresent()) {
-            Animal animal = animalOptional.get();
+        animalOptional.ifPresent(animal -> {
             animal.setAdoptedBy(adopter);
             animal.setAdoptedDate(LocalDateTime.now());
             animalRepository.save(animal);
-            return animal;
-        }
-        throw new RuntimeException("Animal with ID " + animalId + " not found");
+        });
+
+        return animalOptional.orElseThrow(() -> new AnimalNotFoundException("Animal with ID " + animalId + " not found"));
     }
 
+
+
     public List<Animal> getAllAdoptedAnimals() { return animalRepository.findAllByAdoptedByIsNotNull(); }
+
+    public PersonWithAdoptedAnimalsDTO getAdoptedAnimalsByPerson(UUID personId) {
+        Person person = personRepository.findById(personId)
+                .orElseThrow(() -> new PersonNotFoundException("Person with ID " + personId + " not found"));
+
+        List<AnimalWithoutAdoptedByDTO> adoptedAnimals = animalRepository.findByAdoptedBy(person);
+        return new PersonWithAdoptedAnimalsDTO(person, adoptedAnimals);
+    }
 }

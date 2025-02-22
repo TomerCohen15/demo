@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Dog;
 import com.example.demo.service.DogService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
@@ -21,7 +22,7 @@ public class DogController {
     }
 
     @PostMapping
-    public Dog addDog(@RequestBody Dog dog) {
+    public Dog addDog(@Valid @RequestBody Dog dog) {
         Dog newDog = dogService.saveDog(dog);
         logger.info("Added Dog: {}", newDog);
         return newDog;

@@ -2,12 +2,15 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Person;
 import com.example.demo.service.PersonService;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.UUID;
+
 
 @RestController
 @RequestMapping("/persons")
@@ -30,6 +33,13 @@ public class PersonController {
     @GetMapping
     public List<Person> getAllPersons() {
         return personService.getAllPersons();
+    }
+
+    @PutMapping
+    public Person updatePerson(@RequestBody Person person) {
+        Person personToUpdate = personService.updatePerson(person);
+        logger.info("updates person: {}", person);
+        return personService.savePerson(personToUpdate);
     }
 
     @DeleteMapping

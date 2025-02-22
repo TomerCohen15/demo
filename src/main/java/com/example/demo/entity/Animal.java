@@ -20,7 +20,6 @@ public abstract class Animal {
     private Person adoptedBy = null;
     private LocalDateTime adoptedDate;
 
-//    private String type;
     private LocalDateTime timestamp;
 
     public Animal() {}

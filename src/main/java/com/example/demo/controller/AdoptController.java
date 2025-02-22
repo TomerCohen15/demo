@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.PersonWithAdoptedAnimalsDTO;
 import com.example.demo.entity.Animal;
 import com.example.demo.entity.Person;
 import com.example.demo.service.AdoptService;
@@ -43,8 +44,13 @@ public class AdoptController {
     }
 
 
-    @GetMapping
+    @GetMapping("/getAllAdoptedAnimals")
     public List<Animal> getAllAdoptedAnimals() {
         return adoptService.getAllAdoptedAnimals();
+    }
+
+    @GetMapping("/getAdoptedAnimalsByPerson")
+    public PersonWithAdoptedAnimalsDTO getAdoptedAnimalsByPerson(@RequestParam("personId") UUID personId) {
+        return adoptService.getAdoptedAnimalsByPerson(personId);
     }
 }

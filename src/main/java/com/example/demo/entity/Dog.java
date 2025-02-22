@@ -1,10 +1,13 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
 
 @Entity
 public class Dog extends Animal {
-
+    @Min(1)
+    @Max(10)
     private int barkLoudness;
 
     public Dog(String name, String breed, int age, Gender gender, int barkLoudness) {
