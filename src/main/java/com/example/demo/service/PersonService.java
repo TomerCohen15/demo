@@ -37,7 +37,7 @@ public class PersonService {
             new PersonNotFoundException("Person with id: " + id + " not found"));
     }
 
-    public Person updatePerson(@RequestBody Person person) {
+    public Person updatePerson(Person person) {
         Person personToUpdate = getPersonById(person.getId());
 
         if (StringUtils.isNotBlank(person.getName())) {

@@ -10,6 +10,8 @@ services:
       - POSTGRES_DB=postgres
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persistent volume
 
   app:
     build: .
@@ -22,3 +24,6 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
       - SPRING_DATASOURCE_USERNAME=yourusername
       - SPRING_DATASOURCE_PASSWORD=yourpassword
+
+volumes:
+  postgres_data:  # Named volume for database persistence

@@ -28,6 +28,13 @@ public class DogController {
         return newDog;
     }
 
+    @PutMapping
+    public Dog updateDog(@RequestBody Dog dog) {
+        Dog dogToUpdate = dogService.updateDog(dog);
+        logger.info("Updating Dog: {}", dogToUpdate);
+        return dogToUpdate;
+    }
+
     @GetMapping
     public List<Dog> getAllDogs() {
         return dogService.getAllDogs();

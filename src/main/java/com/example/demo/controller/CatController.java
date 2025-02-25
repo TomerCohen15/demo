@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Cat;
+import com.example.demo.entity.Person;
 import com.example.demo.service.CatService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,12 @@ public class CatController {
         logger.info("added Cat: {}", newCat);
         return newCat;
     }
-
+    @PutMapping
+    public Cat updateCat(@RequestBody Cat cat) {
+        Cat catToUpdate = catService.updateCat(cat);
+        logger.info("updates person: {}", cat);
+        return catService.saveCat(catToUpdate);
+    }
 
     @GetMapping("getAllCats")
     public List<Cat> getAllCats() {
