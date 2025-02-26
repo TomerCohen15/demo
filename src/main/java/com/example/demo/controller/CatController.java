@@ -1,12 +1,15 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Cat;
+import com.example.demo.entity.Person;
 import com.example.demo.service.CatService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/cats")
@@ -20,19 +23,28 @@ public class CatController {
     }
 
     @PostMapping
-    public Cat addCat(@RequestBody Cat cat) {
-        logger.info("add Cat: {}", cat);
-        return catService.saveCat(cat);
+    public Cat addCat(@Valid @RequestBody Cat cat) {
+        Cat newCat = catService.saveCat(cat);
+        logger.info("added Cat: {}", newCat);
+        return newCat;
+    }
+    @PutMapping
+    public Cat updateCat(@RequestBody Cat cat) {
+        Cat catToUpdate = catService.updateCat(cat);
+        logger.info("updates person: {}", cat);
+        return catService.saveCat(catToUpdate);
     }
 
-    @GetMapping
+    @GetMapping("getAllCats")
     public List<Cat> getAllCats() {
         return catService.getAllCats();
     }
 
     @DeleteMapping
-    public void deleteCat(@RequestParam("id") Long id) {
-        logger.info("delete Cat: {}", id);
+    public void deleteCat(@RequestParam("id") UUID id) {
+        Cat cat = catService.getCatById(id);
+        logger.info("deleting Cat: {}, with name {}", id, cat.getName());
         catService.deleteCat(id);
+        logger.info("deleted Cat: {}, with name {}", id, cat.getName());
     }
 }

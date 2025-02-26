@@ -25,10 +25,13 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.cloud:spring-cloud-config-server'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+    // utils
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.17.0'
     // logs
     // SLF4J API
     implementation 'org.slf4j:slf4j-api:2.0.9'
@@ -36,6 +39,10 @@ dependencies {
     // Logback (a popular SLF4J implementation)
     implementation 'ch.qos.logback:logback-classic:1.4.11'
 
+    // Add validation dependencies for Spring Boot 3.x (Jakarta EE)
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.0'
+    implementation 'org.hibernate.validator:hibernate-validator:7.0.0.Final'
+    implementation 'org.glassfish:jakarta.el:4.0.0'  // Updated version
 }
 
 dependencyManagement {
@@ -54,3 +61,8 @@ tasks.named('test') {
     }
     useJUnitPlatform()
 }
+// Ensure the built JAR file has the correct name
+bootJar {
+    archiveFileName = 'animal-shelter-docker.jar'
+}
+

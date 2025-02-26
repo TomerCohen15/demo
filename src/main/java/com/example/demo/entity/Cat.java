@@ -1,60 +1,34 @@
 package com.example.demo.entity;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 
 @Entity
-public class Cat {
+public class Cat extends Animal {
+    @Min(1)
+    @Max(10)
+    private int clawSharpness;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private String breed;
-    private int age;
-
-    public Long getId() {
-        return id;
+    public Cat(String name, String breed, int age, Gender gender, int clawSharpness) {
+        super(name, breed, age, gender);
+        this.clawSharpness = clawSharpness;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Cat() {
+        super();
     }
 
-    public String getName() {
-        return name;
+    public int getClawSharpness() {
+        return clawSharpness;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setClawSharpness(int clawSharpness) {
+        this.clawSharpness = clawSharpness;
     }
 
-    public String getBreed() {
-        return breed;
-    }
-
-    public void setBreed(String breed) {
-        this.breed = breed;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    // toString Method
     @Override
     public String toString() {
-        return "Cat{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", breed='" + breed + '\'' +
-                ", age=" + age +
-                '}';
+        return super.toString() + "clawSharpness=" + clawSharpness;
     }
 }

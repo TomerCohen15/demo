@@ -1,10 +1,33 @@
 spring:
   application:
     name: demo
+
   datasource:
     username: yourusername
     password: yourpassword
-    url: jdbc:postgresql://localhost:5432/postgres
+
   jpa:
     hibernate:
       ddl-auto: update
+
+  # Common Configuration for all environments
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: docker
+  datasource:
+    url: jdbc:postgresql://db:5432/postgres
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
