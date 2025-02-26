@@ -7,7 +7,6 @@ WORKDIR /app
 # Copy the JAR file into the container
 COPY build/libs/animal-shelter-docker.jar app.jar
 
-# Expose the application port (adjust if necessary)
 EXPOSE 8080
 
 # Run the application

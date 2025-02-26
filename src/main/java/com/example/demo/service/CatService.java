@@ -48,6 +48,9 @@ public class CatService {
         if (cat.getClawSharpness() != 0) {
             catToUpdate.setClawSharpness(cat.getClawSharpness());
         }
+        if (cat.getBreed() != null) {
+            catToUpdate.setBreed(cat.getBreed());
+        }
         return catRepository.save(catToUpdate);
     }
 }

@@ -50,6 +50,9 @@ public class DogService {
         if (dog.getBarkLoudness() != 0) {
             dogToUpdate.setBarkLoudness(dog.getBarkLoudness());
         }
+        if (dog.getBreed() != null) {
+            dogToUpdate.setBreed(dog.getBreed());
+        }
         return dogRepository.save(dogToUpdate);
     }
 }
